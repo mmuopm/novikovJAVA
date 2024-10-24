@@ -17,6 +17,6 @@ public class SprinklabApplication implements CommandLineRunner {
         // Шаг 1
         BookDaoJDBC bookDaoJDBC = new BookDaoJDBC();
         bookDaoJDBC.findBookById(2);
-        //vdv
+
     }
 }
