@@ -1,4 +1,4 @@
-package Proj.laba.model;
+package Proj.library.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
