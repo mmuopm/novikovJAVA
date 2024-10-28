@@ -1,4 +1,4 @@
-package dbexamples.model;
+package Proj.dbexamples.model;
 
 import lombok.*;
 

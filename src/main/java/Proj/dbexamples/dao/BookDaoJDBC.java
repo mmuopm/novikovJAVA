@@ -1,7 +1,7 @@
-package dbexamples.dao;
+package Proj.dbexamples.dao;
 
-import dbexamples.db.DBConnection;
-import dbexamples.model.Book;
+import Proj.dbexamples.db.DBConnection;
+import Proj.dbexamples.model.Book;
 
 import java.sql.*;
 

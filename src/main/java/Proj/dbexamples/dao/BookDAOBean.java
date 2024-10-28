@@ -1,20 +1,23 @@
-package dbexamples.dao;
+package Proj.dbexamples.dao;
 
-import dbexamples.model.Book;
+import Proj.dbexamples.model.Book;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookDAOBeen {
+@Component
+public class BookDAOBean {
     private final Connection connection;
 
-    private final String BOOK_SELECT_BY_ID_QUERY = "SELECT * FROM book WHERE id = ?";
+    private final String BOOK_SELECT_BY_ID_QUERY = "SELECT * FROM books WHERE id = ?";
 
-    public BookDAOBeen(Connection connection) {
+    public BookDAOBean(Connection connection) {
         this.connection = connection;
     }
+
     public Book findBookById(Integer bookId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(BOOK_SELECT_BY_ID_QUERY);
         statement.setInt(1, bookId);
