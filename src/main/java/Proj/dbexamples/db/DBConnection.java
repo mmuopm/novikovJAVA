@@ -1,10 +1,10 @@
-package dbexamples.db;
+package Proj.dbexamples.db;
+
+import Proj.dbexamples.constants.DBConstants;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import static dbexamples.constants.DBConstants.*;
 
 public enum DBConnection {
     INSTANCE;
@@ -12,8 +12,8 @@ public enum DBConnection {
 
     public Connection getConnection() throws SQLException {
         if (connection == null) {
-            connection = DriverManager.getConnection("jdbc:postgresql://" + DB_HOST + ":" + PORT + "/"
-            + DB, USER, PASSWORD);
+            connection = DriverManager.getConnection("jdbc:postgresql://" + DBConstants.DB_HOST + ":" + DBConstants.PORT + "/"
+            + DBConstants.DB, DBConstants.USER, DBConstants.PASSWORD);
         }
         return connection;
     }

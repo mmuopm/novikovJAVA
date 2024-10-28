@@ -1,4 +1,4 @@
-package dbexamples.constants;
+package Proj.dbexamples.constants;
 
 public interface DBConstants {
     String DB_HOST = "Localhost";
