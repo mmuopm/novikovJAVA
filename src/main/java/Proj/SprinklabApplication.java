@@ -13,18 +13,15 @@ import java.util.List;
 @SpringBootApplication
 public class SprinklabApplication implements CommandLineRunner {
 
-    private BookDAOBean bookDAOBean;
+//    private BookDAOBean bookDAOBean;
 
-    public SprinklabApplication(BookDAOBean bookDAOBean) {
-        this.bookDAOBean = bookDAOBean;
-    }
+//    public SprinklabApplication(BookDAOBean bookDAOBean) {
+//        this.bookDAOBean = bookDAOBean;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(SprinklabApplication.class, args);
     }
-
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public void run(String... args) throws Exception {
