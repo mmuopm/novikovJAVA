@@ -1,10 +1,12 @@
 package Proj.library.controller;
 
+import Proj.library.dto.AuthorDTO;
 import Proj.library.model.Author;
 import Proj.library.model.Book;
 import Proj.library.repository.AuthorRepository;
 import Proj.library.repository.BookRepository;
 import Proj.library.repository.GenericRepository;
+import Proj.library.service.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -19,25 +21,17 @@ import org.webjars.NotFoundException;
 @RestController
 @RequestMapping("/authors")
 @Tag(name = "Авторы", description = "Контроллер для работы с авторами из библиотеки")
-public class AuthorController extends GenericController<Author> {
+public class AuthorController
+        extends GenericController<Author, AuthorDTO> {
+    public AuthorController(AuthorService authorService) {
+        super(authorService);
+    }
 
-        private final BookRepository bookRepository;
-        private final AuthorRepository authorRepository;
-
-        protected AuthorController(GenericRepository<Author> genericRepository, BookRepository bookRepository, AuthorRepository authorRepository) {
-            super(genericRepository);
-            this.bookRepository = bookRepository;
-            this.authorRepository = authorRepository;
-        }
-
-        @Operation(description = "Добавить книгу к автору")
-                @RequestMapping(value = "/addBook", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<Author> addBook(@RequestParam(value = "bookId") Long bookId,
-        @RequestParam(value = "authorId") Long authorId) {
-            Book book = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundException("Книга не найдена"));
-            Author author = authorRepository.findById(authorId).orElseThrow(() -> new NotFoundException("Автор не найден"));
-            author.getBooks().add(book);
-            return ResponseEntity.status(HttpStatus.OK).body(authorRepository.save(author));
+    @Operation(description = "Добавить книгу к автору")
+    @RequestMapping(value = "/addBook", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthorDTO> addBook(@RequestParam(value = "bookId") Long bookId,
+                                             @RequestParam(value = "authorId") Long authorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(((AuthorService) service).addBook(bookId, authorId));
         }
 
     }
