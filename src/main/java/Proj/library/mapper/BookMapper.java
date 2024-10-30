@@ -28,9 +28,9 @@ public abstract class BookMapper
     @Override
     public void setupMapper() {
         modelMapper.createTypeMap(Book.class, BookDTO.class)
-                .addMapping(m -> m.skip(BookDTO::setAuthorIds)).setPostConverter(toDTOConverter());
+                .addMappings(m -> m.skip(BookDTO::setAuthorIds)).setPostConverter(toDTOConverter());
         modelMapper.createTypeMap(BookDTO.class, Book.class)
-                .addMapping(m -> m.skip(Book::setAuthors)).setPostConverter(toEntityConverter());
+                .addMappings(m -> m.skip(Book::setAuthors)).setPostConverter(toEntityConverter());
     }
 
     @Override
