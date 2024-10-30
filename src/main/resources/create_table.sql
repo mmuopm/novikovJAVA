@@ -1,4 +1,4 @@
-create table books
+create table public.books
 (
     id          serial primary key,
     title       varchar(30) not null,
@@ -6,14 +6,15 @@ create table books
     date_added  timestamp not null
 )
 
+commit;
 
-insert into books (title, author, date_added)
+insert into public.books (title, author, date_added)
 values('Недоросль', 'Д.И. Фонвизин', now());
-insert into books (title, author, date_added)
+insert into public.books (title, author, date_added)
 values('Потерянный рай', 'Д. Мильтон', now() - interval '24h');
-insert into books (title, author, date_added)
+insert into public.books (title, author, date_added)
 values('Война и Мир', 'Л.Н. Толстой', now() - interval '24h');
-insert into books (title, author, date_added)
+insert into public.books (title, author, date_added)
 values('Братья Карамазовы', 'Ф.М. Достоевский', now() - interval '24h');
 
-select * from books
+select * from books_authors

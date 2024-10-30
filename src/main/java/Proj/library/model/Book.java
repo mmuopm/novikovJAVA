@@ -1,5 +1,6 @@
 package Proj.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +45,10 @@ public class Book  extends GenericModel{
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "books")
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "books_authors",
+    joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
+    inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
     List<Author> authors;
 }
