@@ -2,9 +2,11 @@ package Proj.library.controller;
 
 
 import Proj.library.dto.AuthorDTO;
+import Proj.library.dto.BookRentInfoDTO;
 import Proj.library.model.BookRentInfo;
 import Proj.library.repository.BookRentInfoRepository;
 import Proj.library.service.AuthorService;
+import Proj.library.service.BookRentInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -21,9 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
         description = "Контроллер для работы с арендой/выдачей книг пользователям библиотеки")
 public class RentBookController
         extends GenericController<BookRentInfo, BookRentInfoDTO> {
-    public RentBookController(BookRentInfoRepository genericRepository) {
-        super(genericRepository);
+
+    public RentBookController(BookRentInfoService bookRentInfoService ) {
+        super(bookRentInfoService);
     }
-
-
 }
