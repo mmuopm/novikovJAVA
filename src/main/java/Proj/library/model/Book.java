@@ -39,15 +39,15 @@ public class Book  extends GenericModel{
     private String onlineCopyPath;
 
     @Column(name = "genre", nullable = false)
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING) //чтоб enum не выводился в числовом значении
     private Genre genre;
 
     @Column(name = "description")
     private String description;
 
     @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "books_authors",
+    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "books_authors", //чтобы таблицы books и authors стали равнозначными
     joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "FK_BOOKS_AUTHORS"),
     inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "FK_AUTHORS_BOOKS"))
     List<Author> authors;

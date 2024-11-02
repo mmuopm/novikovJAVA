@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public abstract class BookMapper
+public class BookMapper
         extends GenericMapper<Book, BookDTO> {
     private final AuthorRepository authorRepository;
 

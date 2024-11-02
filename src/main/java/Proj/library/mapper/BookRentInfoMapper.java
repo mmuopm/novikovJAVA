@@ -12,7 +12,7 @@ import org.webjars.NotFoundException;
 import java.util.List;
 
 @Component
-public abstract class BookRentInfoMapper
+public class BookRentInfoMapper
         extends GenericMapper<BookRentInfo, BookRentInfoDTO> {
     private final BookRepository bookRepository;
     private final UserRepository userRepository;

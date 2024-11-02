@@ -23,6 +23,7 @@ import org.webjars.NotFoundException;
 @Tag(name = "Авторы", description = "Контроллер для работы с авторами из библиотеки")
 public class AuthorController
         extends GenericController<Author, AuthorDTO> {
+
     public AuthorController(AuthorService authorService) {
         super(authorService);
     }

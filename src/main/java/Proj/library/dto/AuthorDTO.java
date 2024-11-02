@@ -16,5 +16,5 @@ public class AuthorDTO extends GenericDTO {
     private String authorName;
     private LocalDate birthDate;
     private String description;
-    List<Long> booksIds;
+    List<Long> booksIds; //чтобы исключить зациклевание, можно включить список id, а не объектов
 }

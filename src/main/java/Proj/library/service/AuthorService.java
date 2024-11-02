@@ -25,7 +25,8 @@ public class AuthorService
         this.bookRepository = bookRepository;
     }
 
-    public AuthorDTO addBook (Long bookId, Long authorId) {
+    public AuthorDTO addBook(Long bookId,
+                             Long authorId) {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundException("Книга не найдена!"));
         AuthorDTO author = getOne(authorId);
         author.getBooksIds().add(book.getId());

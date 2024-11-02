@@ -29,7 +29,7 @@ public class BookController
         super(bookService);
     }
 
-    @Operation(description = "Добавить автора к книге")
+    @Operation(description = "Добавить книгу к автору")
     @RequestMapping(value = "/addAuthor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDTO> addAuthor(@RequestParam(value = "bookId") Long bookId,
                                             @RequestParam(value = "authorId") Long authorId) {

@@ -12,10 +12,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Objects;
 
+
+//@param <E> - сущность, с которой мы работаем
+//@param <D> - сущность, которую мы будем отдавать/принимать далее
 @Component
 public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO>
         implements Mapper<E, D>{
 
+    //внедряем то, с чем будем работать
     private final Class<E> entityClass;
     private final Class<D> dtoClass;
     protected final ModelMapper modelMapper;
@@ -28,6 +32,7 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
         this.modelMapper = modelMapper;
     }
 
+    //описываем логику методов, обозначаеных в интерфейсе Mapper
     @Override
     public E toEntity(D dto) {
         return Objects.isNull(dto)
@@ -36,10 +41,10 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
     }
 
     @Override
-    public D toEntity(E entity) {
+    public D toDTO(E entity) {
         return Objects.isNull(entity)
                 ? null
-                : modelMapper.map(entity, dtoClass );
+                : modelMapper.map(entity, dtoClass);
     }
 
     @Override
@@ -66,12 +71,14 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDTO
         };
     }
 
-    protected abstract void mapSpecificFields(D sourse, E destinaion);
-    protected abstract void mapSpecificFields(E sourse, D destinaion);
+    //маппинг нестандартных полей
+    protected abstract void mapSpecificFields(D source, E destination);
+    protected abstract void mapSpecificFields(E source, D destination);
 
+    //настройка маппера (что делать и что вызывать в случае несовпадения типов данных сорса/дестинейшена)
     @PostConstruct
     protected abstract void setupMapper();
     protected abstract List<Long> getIds(E entity);
 
-    protected abstract void mapSpecificFIelds(Author sourse, AuthorDTO destination);
+    //protected abstract void mapSpecificFields(Author source, AuthorDTO destination);
 }

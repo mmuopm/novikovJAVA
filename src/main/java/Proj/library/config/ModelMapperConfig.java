@@ -12,10 +12,10 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setFieldMatchingEnabled(true)
-                .setSkipNullEnabled(true)
-                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
+                .setMatchingStrategy(MatchingStrategies.STRICT) //строгое совпадение
+                .setFieldMatchingEnabled(true) //разрешаем совпадение по полям
+                .setSkipNullEnabled(true) //разрешаем пропускать поля, которые маппер не нашел и присваивать им null
+                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);//доступ к private-полям
         return modelMapper;
     }
 }

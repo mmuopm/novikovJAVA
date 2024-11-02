@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookRentInfoDTO
-        extends GenericDTO{
+        extends GenericDTO {
+
     private LocalDateTime rentDate;
     private LocalDateTime returnDate;
     private Boolean returned;

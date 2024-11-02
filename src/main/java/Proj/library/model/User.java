@@ -48,9 +48,9 @@ public class User extends GenericModel {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.MERGE) //много пользователей могут иметь 1 роль
     @JoinColumn(name = "role_id", nullable = false,
-    foreignKey = @ForeignKey(name = "USERS_ROLES"))
+            foreignKey = @ForeignKey(name = "USERS_ROLES"))
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

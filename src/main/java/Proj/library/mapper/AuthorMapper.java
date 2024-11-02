@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public abstract class AuthorMapper //только с abstract начал работать
+public class AuthorMapper
         extends GenericMapper<Author, AuthorDTO>{
 
     private final BookRepository bookRepository;
@@ -25,6 +25,7 @@ public abstract class AuthorMapper //только с abstract начал раб�
         this.bookRepository = bookRepository;
     }
 
+    //настройка маппинга нестандартных полей
     @PostConstruct
     protected void setupMapper() {
         modelMapper.createTypeMap(Author.class, AuthorDTO.class)
@@ -33,25 +34,27 @@ public abstract class AuthorMapper //только с abstract начал раб�
                 .addMappings(mapping -> mapping.skip(Author::setBooks)).setPostConverter(toEntityConverter());
     }
 
+    //маппинг нестандартых полей из DTO в модель
     @Override
-    protected void mapSpecificFields(AuthorDTO sourse, Author destination) {
-        if (!Objects.isNull(sourse.getBooksIds())) {
-            destination.setBooks(bookRepository.findAllById(sourse.getBooksIds()));
+    protected void mapSpecificFields(AuthorDTO source, Author destination) {
+        if (!Objects.isNull(source.getBooksIds())) {
+            destination.setBooks(bookRepository.findAllById(source.getBooksIds()));
         } else {
             destination.setBooks(Collections.emptyList());
         }
     }
 
+    //маппинг нестандартных полей из модели в ДТО
     @Override
-    protected void mapSpecificFIelds(Author sourse, AuthorDTO destination) {
-        destination.setBooksIds(getIds(sourse));
+    protected void mapSpecificFields(Author source, AuthorDTO destination) {
+        destination.setBooksIds(getIds(source));
     }
 
     @Override
-    protected List<Long> getIds(Author sourse) {
-        return Objects.isNull(sourse) || Objects.isNull(sourse.getBooks())
+    protected List<Long> getIds(Author source) {
+        return Objects.isNull(source) || Objects.isNull(source.getBooks())
                 ? Collections.emptyList()
-                : sourse.getBooks().stream()
+                : source.getBooks().stream()
                 .map(GenericModel::getId)
                 .collect(Collectors.toList());
     }
