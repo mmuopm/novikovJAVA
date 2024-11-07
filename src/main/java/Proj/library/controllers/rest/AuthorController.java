@@ -1,11 +1,7 @@
-package Proj.library.controller;
+package Proj.library.controllers.rest;
 
 import Proj.library.dto.AuthorDTO;
 import Proj.library.model.Author;
-import Proj.library.model.Book;
-import Proj.library.repository.AuthorRepository;
-import Proj.library.repository.BookRepository;
-import Proj.library.repository.GenericRepository;
 import Proj.library.service.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.webjars.NotFoundException;
 
 @RestController
 @RequestMapping("/authors")

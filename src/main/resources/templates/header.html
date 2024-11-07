@@ -1,0 +1,33 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     th:fragment="header">
+    <nav class="navbar navbar-expand-lg" style="background-color: limegreen">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white"  href="/"> Онлайн библиотека</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="nav-bar-toggle-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id = "navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/books">Книги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/authors">Авторы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/my/books">Мои книги</a>
+                    </li>
+                </ul>
+                <div class="nav-item">
+                    <a class="nav-link active" style="float: right" href="/profile">Профиль</a>
+                </div>
+
+                <form class="d-flex">
+                    <a href="/logout" class="btn btn-primary" role="button" aria-disabled="true>">Выйти</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>

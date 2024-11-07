@@ -1,8 +1,7 @@
-package Proj.library.controller;
+package Proj.library.controllers.rest;
 
 import Proj.library.dto.GenericDTO;
 import Proj.library.model.GenericModel;
-import Proj.library.repository.GenericRepository;
 import Proj.library.service.GenericService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -10,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.webjars.NotFoundException;
 
-import java.awt.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController

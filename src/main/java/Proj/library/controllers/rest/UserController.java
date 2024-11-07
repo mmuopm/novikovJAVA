@@ -1,9 +1,8 @@
-package Proj.library.controller;
+package Proj.library.controllers.rest;
 
 
 import Proj.library.dto.UserDTO;
 import Proj.library.model.User;
-import Proj.library.repository.UserRepository;
 import Proj.library.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
