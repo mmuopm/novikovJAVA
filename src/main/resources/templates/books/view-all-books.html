@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Книги библиотеки</title>
+    <style>
+        .not-enough-book {
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Все книги библиотеки</h1>
+    <div class="row">
+        <div class="col">
+            <a href="books/add"
+               class="btn btn-secondary"
+               role="button"
+               style="float: right"
+               aria-disabled="true">Добавить книгу</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Место хранения</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Дата публикации</th>
+            <!--<th scope="col">Автор(ы)</th>-->
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.getBookTitle()}"></td>
+            <td th:text="${book.getGenre().getGenreTextDisplay()}"></td>
+            <td th:text="${book.getStoragePlace()}"></td>
+            <td th:classappend="${book.getAmount() <= 0} ? 'not-enough-book' "
+                th:text="${book.getAmount()} <=0 ? 'Нет в наличии' : ${book.getAmount()}"></td>
+            <td th:text="${book.getPublishDate()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
