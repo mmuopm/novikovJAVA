@@ -10,29 +10,33 @@
 <div layout:fragment="content">
     <form style="max-width: 50vw" method="POST" th:action="@{/books/add}" th:object="${bookForm}">
         <div class="mb-3">
+            <label for="title" class="form-label">Название</label>
+            <input name="nametitle" type="text" class="form-control" id="title">
+        </div>
+        <div class="mb-3">
+            <label for="storage" class="form-label">Место хранения</label>
+            <input name="storagePlace" type="text" class="form-control" id="storage">
+        </div>
+        <div class="mb-3">
             <label for="amount" class="form-label">Количество</label>
             <input name="amount" type="number" class="form-control" id="amount">
         </div>
-
         <div class="mb-3">
             <label for="description" class="form-label">Описание</label>
             <input name="description" type="text" class="form-control" id="description">
         </div>
-
         <div class="mb-3">
             <label for="date" class="form-label">Дата издания</label>
             <input name="publishDate" type="text" class="form-control" id="date">
         </div>
-
         <div class="mb-3">
             <label for="genre" class="form-label">Жанр</label>
             <select class="form-select" name="genre" id="genre">
                 <option selected>Выберете жанр из списка:</option>
-                <option th:each="genre : ${T(Proj.library.model.Genre).values()}"
+                <option th:each="genre : ${T( ).values()}"
                         th:value="${genre}" th:text="${genre.getGenreTextDisplay()}"></option>
             </select>
         </div>
-
         <button type="submit" class="btn btn-primary">Добавить</button>
         <button type="button" class="btn btn-secondary" onclick="window.history.back()">Назад</button>
     </form>

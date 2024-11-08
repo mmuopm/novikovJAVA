@@ -1,5 +1,4 @@
 package Proj.library.controllers.mvc;
-
 import Proj.library.dto.BookDTO;
 import Proj.library.service.BookService;
 import groovy.util.logging.Slf4j;
@@ -13,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-
+@lombok.extern.slf4j.Slf4j
 @Slf4j
 @Controller
 @RequestMapping("/books")
 public class MVCBookController {
-    private static final Logger log = LoggerFactory.getLogger(MVCBookController.class);
+
     private final BookService bookService;
 
     public MVCBookController(BookService bookService) {

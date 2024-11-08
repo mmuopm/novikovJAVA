@@ -3,6 +3,7 @@ package Proj;
 import Proj.dbexamples.dao.BookDAOBean;
 import Proj.dbexamples.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,11 +14,8 @@ import java.util.List;
 @SpringBootApplication
 public class SprinklabApplication implements CommandLineRunner {
 
-//    private BookDAOBean bookDAOBean;
-
-//    public SprinklabApplication(BookDAOBean bookDAOBean) {
-//        this.bookDAOBean = bookDAOBean;
-//    }
+    @Value("${server.port}")
+    private String serverPort;
 
     public static void main(String[] args) {
         SpringApplication.run(SprinklabApplication.class, args);
@@ -25,17 +23,7 @@ public class SprinklabApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Шаг 1
-//        BookDaoJDBC bookDaoJDBC = new BookDaoJDBC();
-//        System.out.println(bookDAOBean.findBookById(2));
-
-//        List<Book> bookList = namedParameterJdbcTemplate.query("select * from books", ((rs, rowNum) -> new Book(
-//                rs.getInt("id"),
-//                rs.getString("title"),
-//                rs.getString("author"),
-//                rs.getDate("date_added")
-//        )));
-//        bookList.forEach(System.out::println);
-
+        System.out.println("Swagger path: http://localhost:" + serverPort + "/swagger-ui/index.html");
+        System.out.println("Application path: http://localhost:" + serverPort + "/");
     }
 }
