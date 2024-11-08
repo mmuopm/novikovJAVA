@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru"
-      xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Добавить книгу</title>
@@ -11,7 +11,7 @@
     <form style="max-width: 50vw" method="POST" th:action="@{/books/add}" th:object="${bookForm}">
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>
-            <input name="nametitle" type="text" class="form-control" id="title">
+            <input name="bookTitle" type="text" class="form-control" id="title">
         </div>
         <div class="mb-3">
             <label for="storage" class="form-label">Место хранения</label>
@@ -27,13 +27,13 @@
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Дата издания</label>
-            <input name="publishDate" type="text" class="form-control" id="date">
+            <input name="publishDate" type="date" class="form-control" id="date">
         </div>
         <div class="mb-3">
             <label for="genre" class="form-label">Жанр</label>
             <select class="form-select" name="genre" id="genre">
                 <option selected>Выберете жанр из списка:</option>
-                <option th:each="genre : ${T( ).values()}"
+                <option th:each="genre : ${T(Proj.library.model.Genre).values()} "
                         th:value="${genre}" th:text="${genre.getGenreTextDisplay()}"></option>
             </select>
         </div>
