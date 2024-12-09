@@ -66,7 +66,6 @@ public class CustomUserDetails
         return enabled;
     }
 
-    @Override
     public Integer getUserId() {
         return id;
     }
