@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class CustomUserDetailsService
         implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Value("${spring.security.user.name}")
