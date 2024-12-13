@@ -8,37 +8,91 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form style="max-width: 50vw" method="POST" th:action="@{/books/add}" th:object="${bookForm}">
-        <div class="mb-3">
-            <label for="title" class="form-label">Название</label>
-            <input name="bookTitle" type="text" class="form-control" id="title">
+    <h3 class="mt-3 mb-3">Добавить книгу </h3>
+    <form enctype="multipart/form-data" class="needs-validation" novalidate style="max-width: 50vw" method="POST" th:action="@{/books/add}" th:object="${bookForm}">
+       <div class="mt-3 row g-2">
+           <div class="col-md">
+               <div class="form-floating">
+                   <!--Название поля инпута должно строго соответствовать названию поля класса (ДТО)-->
+                   <input name="bookTitle" type="text" class="form-control" id="title" placeholder="Название книги" required>
+                   <label for="title">Название</label>
+                   <div class="invalid-feedback">Обязательное поле для заполнения</div>
+               </div>
+           </div>
+
+           <div class="col-md">
+               <div class="form-floating">
+                   <select class="form-select" name="genre" id="genre" required>
+                       <option selected value="default">Выберете жанр из списка</option>
+                       <option th:each="genre : ${T(com.Proj.library.model.Genre.java).values()}"
+                               th:value="${genre}" th:text="${genre.getGenreTextDisplay()}"></option>
+                   </select>
+                   <label for="genre">Жанр</label>
+                   <div class="invalid-feedback">Обязательное поле для заполнения</div>
+               </div>
+           </div>
+       </div>
+<!--           TODO: тут будет загрузка файла
+           <div class="mt-3 form-floating">
+               <input name="onlineCopy" type="file" class="form-control form-conrol-sm" id="onlineCopy" placeholder="Онлайн копия файла" style="padding-top: 2rem;">
+               <label for="onlineCopy">Онлайн копия</label>
+           </div>-->
+        <div class="mt-3 row g-2">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="amount" type="number" class="form-control" id="amount" placeholder="Количество книг" value="1" required>
+                    <label for="amount">Количество книг</label>
+                    <div class="invalid-feedback">Обязательное поле для заполнения</div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="pageCount" type="number" class="form-control" id="pageCount" placeholder="Количество страниц" value="1" >
+                    <label for="pageCount">Количество страниц</label>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="storage" class="form-label">Место хранения</label>
-            <input name="storagePlace" type="text" class="form-control" id="storage">
+
+        <div class="mt-3 row g-2">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="publish" type="text" class="form-control" id="publish" placeholder="Издательство" required>
+                    <label for="publish">Издательство</label>
+                    <div class="invalid-feedback">Обязательное поле для заполнения</div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="publishDate" type="date" class="form-control" id="date" placeholder="Дата публикации" required>
+                    <label for="date">Дата издания</label>
+                    <div class="invalid-feedback">Обязательное поле для заполнения</div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="amount" class="form-label">Количество</label>
-            <input name="amount" type="number" class="form-control" id="amount">
+
+        <div class="mt-3 row g-2">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="storagePlace" type="text" class="form-control" id="storage" placeholder="Место хранения" >
+                    <label for="storage">Место хранения</label>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="form-floating">
+                    <textarea name="description" type="date" class="form-control" id="description" placeholder="Описание"></textarea>
+                    <label for="description">Описание</label>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Описание</label>
-            <input name="description" type="text" class="form-control" id="description">
+
+        <div class="mt-3 row g-2>">
+            <button type="submit" class="btn btn-primary" onclick="validateForm()">Добавить</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Назад</button>
         </div>
-        <div class="mb-3">
-            <label for="date" class="form-label">Дата издания</label>
-            <input name="publishDate" type="date" class="form-control" id="date">
-        </div>
-        <div class="mb-3">
-            <label for="genre" class="form-label">Жанр</label>
-            <select class="form-select" name="genre" id="genre">
-                <option selected>Выберете жанр из списка:</option>
-                <option th:each="genre : ${T(Proj.library.model.Genre).values()} "
-                        th:value="${genre}" th:text="${genre.getGenreTextDisplay()}"></option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Добавить</button>
-        <button type="button" class="btn btn-secondary" onclick="window.history.back()">Назад</button>
+
     </form>
 </div>
 </body>

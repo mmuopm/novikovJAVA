@@ -33,7 +33,8 @@ public class CustomUserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (username.equals(adminUserName)) {
-            return new CustomUserDetails(null, username, adminPassword, List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+            return new CustomUserDetails(null, username, adminPassword, List.of(new SimpleGrantedAuthority("ROLE_" +
+                    "ADMIN")));
         } else {
             User user = userRepository.findUserByLogin(username);
             List<GrantedAuthority> authorities = new ArrayList<>();
@@ -42,7 +43,7 @@ public class CustomUserDetailsService
                     ? "ROLE_" + UserRolesConstants.USER
                     : "ROLE_" + UserRolesConstants.LIBRARIAN));
 
-            return new CustomUserDetailsService(user.getId().intValue(),username, user.getPassword(),authorities);
+            return new CustomUserDetailsService(user.getId().intValue(), username, user.getPassword(), authorities);
         }
     }
 }

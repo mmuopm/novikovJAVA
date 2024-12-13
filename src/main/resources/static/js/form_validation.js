@@ -15,7 +15,7 @@ function validateForm() {
           event.stopPropagation()
         }
 
-/*        TODO:Проверка на жанр(что жанр выбран)
+     /*   TODO:Проверка на жанр(что жанр выбран)
         if (genre.value === 'default') {
             alert("Пожалуйста, выберете жанр!");
             event.preventDefault()
