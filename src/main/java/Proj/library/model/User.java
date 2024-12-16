@@ -55,4 +55,6 @@ public class User extends GenericModel {
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BookRentInfo> bookRentInfos;
+
+
 }

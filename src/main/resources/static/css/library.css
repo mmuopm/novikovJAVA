@@ -1,0 +1,27 @@
+.not-enough-book {
+ color:red;
+}
+
+.nav-link {
+ color: whitesmoke !important;
+}
+
+.btn-primary {
+ color: white !important;
+ background-color: #b84f3c !important;
+ border-color: #b84f3c !important;
+}
+
+.btn-primary:hover {
+ background-color: #b84f3c !important;
+ border-color: #b84f3c !important;
+ color: white !important;
+}
+
+.text-link {
+ text-decoration: none;
+}
+
+.text-link:hover {
+ color: #001445;
+}
