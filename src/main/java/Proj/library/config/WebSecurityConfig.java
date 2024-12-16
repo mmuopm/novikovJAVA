@@ -1,9 +1,13 @@
 package Proj.library.config;
 
+import Proj.library.service.userdetails.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -15,6 +19,14 @@ import static Proj.library.constants.UserRolesConstants.LIBRARIAN;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder, CustomUserDetailsService customUserDetailsService) {
+        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+        this.customUserDetailsService=customUserDetailsService;
+    }
 
     private final List<String> RESOURCES_WHITE_LIST = List.of(
             "/resources/**",
@@ -32,6 +44,12 @@ public class WebSecurityConfig {
             "/books/delete"
     );
 
+    private final List<String> USER_WHITE_LIST = List.of(
+            "/login",
+            "/users/registration",
+            "/users/remember-password/"
+    );
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -40,6 +58,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(RESOURCES_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(BOOKS_WHITE_LIST.toArray(String[]::new)).permitAll()
+                        .requestMatchers(USER_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(BOOKS_PERMISIONS_LIST.toArray(String[]::new)).hasAnyRole(ADMIN, LIBRARIAN)
                         .anyRequest().authenticated()
                 )
@@ -59,5 +78,10 @@ public class WebSecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 );
         return httpSecurity.build();
+    }
+
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 }
