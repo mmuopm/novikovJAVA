@@ -3,7 +3,7 @@ package Proj.library.service.userdetails;
 import Proj.library.constants.UserRolesConstants;
 import Proj.library.model.Role;
 import Proj.library.repository.UserRepository;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,9 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Proj.library.constants.UserRolesConstants.ADMIN;
+
 @Service
 public class CustomUserDetailsService
         implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Value("${spring.security.user.name}")
@@ -32,7 +35,7 @@ public class CustomUserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (username.equals(adminUserName)) {
-            return new CustomUserDetails(null, username, adminPassword, List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+            return new CustomUserDetails(null, username, adminPassword, List.of(new SimpleGrantedAuthority("ROLE_" + ADMIN)));
         } else {
             User user = userRepository.findUserByLogin(username);
             List<GrantedAuthority> authorities = new ArrayList<>();
@@ -41,7 +44,7 @@ public class CustomUserDetailsService
                     ? "ROLE_" + UserRolesConstants.USER
                     : "ROLE_" + UserRolesConstants.LIBRARIAN));
 
-            return new CustomUserDetailsService(user.getId().intValue(),username, user.getPassword(),authorities);
+            return new CustomUserDetails(user.getId().intValue(),username, user.getPassword(),authorities);
         }
     }
 }
