@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static Proj.dbexamples.constants.DBConstants.USER;
 import static Proj.library.constants.UserRolesConstants.ADMIN;
 
 @Configuration
@@ -43,7 +44,7 @@ public class JWTSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling()
-
+//                .authenticationEntryPoint()
                 .and()
                 .sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
