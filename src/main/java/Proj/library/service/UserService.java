@@ -6,6 +6,7 @@ import Proj.library.mapper.GenericMapper;
 import Proj.library.model.User;
 import Proj.library.repository.GenericRepository;
 import Proj.library.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,10 @@ public class UserService
 
     public UserDTO getUserByEmail(final String email) {
         return mapper.toDTO(((UserRepository) repository).findUserByEmail(email));
+    }
+
+    public boolean checkPassword(String password, UserDetails foundUser) {
+        return bCryptPasswordEncoder.matches(password, foundUser.getPassword());
     }
 }
 
