@@ -14,6 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static Proj.dbexamples.constants.DBConstants.USER;
+import static Proj.library.constants.SecurityConstants.RESOURCES_WHITE_LIST;
+import static Proj.library.constants.SecurityConstants.USERS_REST_WHITE_LIST;
 import static Proj.library.constants.UserRolesConstants.ADMIN;
 
 @Configuration

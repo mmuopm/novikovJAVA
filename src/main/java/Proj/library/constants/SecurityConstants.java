@@ -2,7 +2,7 @@ package Proj.library.constants;
 
 import java.util.List;
 
-public class SecurityConstants {
+public interface SecurityConstants {
     List<String> RESOURCES_WHITE_LIST = List.of("/resources/**",
             "/static/**",
             "/js/**",

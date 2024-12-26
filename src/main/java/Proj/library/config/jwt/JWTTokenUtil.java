@@ -19,6 +19,7 @@ import java.util.function.Function;
 @Slf4j
 public class JWTTokenUtil {
 
+    //7*24*60*60*1000=1 неделя в миллисекундах (время жизни токена)
     public static final long  JWT_TOKEN_VALIDITY = 604800000;
     private static final Logger log = LoggerFactory.getLogger(JWTTokenUtil.class);
     public final String secret = "l123lsd7TI716t2_oe";
@@ -34,7 +35,7 @@ public class JWTTokenUtil {
                 .compact();
     }
 
-    //подтверждение токена
+    //подтверждение токена(валидирование токена)
     public Boolean validateToken(final String token,
                                  UserDetails userDetails) {
         final String userName = getUsernameFromToken(token);

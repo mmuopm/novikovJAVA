@@ -1,20 +1,19 @@
 package Proj.library.config.jwt;
 
 import Proj.library.service.userdetails.CustomUserDetailsService;
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.net.http.HttpHeaders;
+import java.io.IOException;
 
 @Component
 public class JWTTokenFilter
@@ -31,7 +30,7 @@ public class JWTTokenFilter
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IDException {
+                                    FilterChain filterChain) throws ServletException, IOException {
         String token = null;
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header== null || !header.startsWith("Bearer ")) {
