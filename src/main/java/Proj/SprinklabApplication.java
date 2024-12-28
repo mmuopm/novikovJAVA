@@ -22,7 +22,7 @@ public class SprinklabApplication implements CommandLineRunner {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println(encoder.encode("admin"));
 
-        System.out.println("Swagger path: http://localhost:" + serverPort + "/swagger-ui/index.html");
-        System.out.println("Application path: http://localhost:" + serverPort + "/");
+        System.out.println("Swagger: http://localhost:" + serverPort + "/swagger-ui/index.html");
+        System.out.println("Приложение: http://localhost:" + serverPort + "/");
     }
 }

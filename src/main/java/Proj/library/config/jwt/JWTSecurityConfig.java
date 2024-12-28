@@ -34,28 +34,24 @@ public class JWTSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain jwtSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .cors().disable()
                 .csrf().disable()
-                //настройка http-запросов - кому/куда можно/нельзя
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(RESOURCES_WHITE_LIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(USERS_REST_WHITE_LIST.toArray(String[]::new)).permitAll()
-                        .requestMatchers("/authors/**").hasAnyRole(ADMIN,USER)
+                        .requestMatchers("/authors/**").hasAnyRole(ADMIN, USER)
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling()
-//                .authenticationEntryPoint()
                 .and()
-                .sessionManagement(
-                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(customUserDetailsService);
         return httpSecurity.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
